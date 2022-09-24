@@ -81,6 +81,7 @@ def get_data_from_xml(filename):
     ClssfctnTp = []
     CmmdtyDerivInd = []
     NtnlCcy = []
+    Issrs = []
 
     # Namespace to be added at the start of every element (xmlns)
 
@@ -105,18 +106,15 @@ def get_data_from_xml(filename):
             FinInstrmGnlAttrbts.find("{0}NtnlCcy".format(namespace)).text
         )  # Getting NtnlCcy from the NtnlCcy Tag
 
+    for Issr in root.iter("{0}Issr".format(namespace)):
+        Issrs.append(Issr.text)
+
     # Save all the data in CSV
 
-    convert_to_csv(Id, FullNm, ClssfctnTp, CmmdtyDerivInd, NtnlCcy)
+    convert_to_csv(Id, FullNm, ClssfctnTp, CmmdtyDerivInd, NtnlCcy, Issrs)
 
 
-def convert_to_csv(
-    Id,
-    FullNm,
-    ClssfctnTp,
-    CmmdtyDerivInd,
-    NtnlCcy,
-):
+def convert_to_csv(Id, FullNm, ClssfctnTp, CmmdtyDerivInd, NtnlCcy, Issrs):
     df = pd.DataFrame(
         {
             "Id": Id,
@@ -124,6 +122,7 @@ def convert_to_csv(
             "ClssfctnTp": ClssfctnTp,
             "CmmdtyDerivInd": CmmdtyDerivInd,
             "NtnlCcy": NtnlCcy,
+            "Issr": Issrs,
         }
     )
     df.to_csv("Final.csv")

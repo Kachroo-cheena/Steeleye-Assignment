@@ -3,7 +3,7 @@
 
 ## All the steps mentioned in the assignment was completed and implemented in main.py file with proper docs
 
-# HOW TO RUN
+# How to run
 1. Clone the repo
 2. run pip install -r requirements.txt
 3. run python main.py
